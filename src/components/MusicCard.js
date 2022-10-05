@@ -1,5 +1,5 @@
 import React from 'react';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -7,22 +7,35 @@ class MusicCard extends React.Component {
     this.state = {
       loading: false,
       check: false,
+      favorites: [],
     };
   }
 
-  favorite = async (object) => {
+  async componentDidMount() {
+    const { trackId } = this.props;
+    const { favorites } = this.state;
+    this.setState({ loading: true });
+    const favorite = await getFavoriteSongs();
+    console.log(favorite);
+    favorite.find((element) => element.trackId === (trackId))
+      ? this.setState({ check: true })
+      : this.setState({ check: false });
+    this.setState({ loading: false });
+  }
+
+  favorite = async (event) => {
     const { loading, check } = this.state;
-    const { target } = object;
+    const { target } = event;
     this.setState({ check: !check });
     this.setState({ loading: true });
-    const favoriteSong = await addSong(target.id);
-    const unFavoriteSong = await removeSong(target.id);
+    target.checked
+      ? await addSong(JSON.parse(target.value))
+      : await removeSong(JSON.parse(target.value));
     this.setState({ loading: false });
-    console.log(unFavoriteSong);
   };
 
   render() {
-    const { previewUrl, songName, trackId } = this.props;
+    const { previewUrl, songName, trackId, element } = this.props;
     const { loading, check } = this.state;
     return (
       <div className="main">
@@ -41,8 +54,9 @@ class MusicCard extends React.Component {
             type="checkBox"
             id={ trackId }
             data-testid={ `checkbox-music-${trackId}` }
-            onClick={ this.favorite }
+            onChange={ this.favorite }
             checked={ check }
+            value={ JSON.stringify(element) }
 
           />
         </label>
