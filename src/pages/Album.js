@@ -28,6 +28,7 @@ class Album extends React.Component {
 
   render() {
     const { artist, loading, songs } = this.state;
+    console.log(songs);
     return (
       <div className="main" data-testid="page-album">
         <Header />
@@ -39,6 +40,7 @@ class Album extends React.Component {
             key={ key }
             previewUrl={ element.previewUrl }
             songName={ element.trackName }
+            trackId={ element.trackId }
           />
             : null
         ))}
