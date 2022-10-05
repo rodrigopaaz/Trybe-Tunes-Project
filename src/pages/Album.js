@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
 
 class Album extends React.Component {
@@ -7,6 +8,8 @@ class Album extends React.Component {
     super();
     this.state = {
       artist: '',
+      loading: false,
+      songs: [],
     };
   }
 
@@ -16,18 +19,31 @@ class Album extends React.Component {
 
   musicFilter = async () => {
     const { match: { params } } = this.props;
+    this.setState({ loading: true });
     const musics = await getMusics(params.id);
+    this.setState({ loading: false });
     this.setState({ artist: musics[0] });
+    this.setState({ songs: musics });
   };
 
   render() {
-    const { artist } = this.state;
-    console.log(artist.artistName);
+    const { artist, loading, songs } = this.state;
     return (
       <div className="main" data-testid="page-album">
         <Header />
-        <h2 data-testid="artist-name">{artist.artistName }</h2>
-        <h2 data-testid="album-name">{artist.collectionName }</h2>
+        {loading && <p>Carregando...</p>}
+        {!loading
+          && <p data-testid="artist-name">{artist.artistName }</p>}
+        { songs.map((element, key) => (
+          key >= 1 ? <MusicCard
+            key={ key }
+            previewUrl={ element.previewUrl }
+            songName={ element.trackName }
+          />
+            : null
+        ))}
+        {!loading
+          && <p data-testid="album-name">{artist.collectionName }</p>}
 
       </div>
     );
