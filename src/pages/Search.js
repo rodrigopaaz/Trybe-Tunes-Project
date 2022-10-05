@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
@@ -57,7 +57,6 @@ class Search extends React.Component {
 
   render() {
     const { loading, user, checkLength, showAlbum, albumName, album } = this.state;
-    const { history } = this.props;
     return (
       <div className="main" data-testid="page-search">
         <Header />

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
@@ -7,30 +8,34 @@ class MusicCard extends React.Component {
     this.state = {
       loading: false,
       check: false,
-      favorites: [],
     };
   }
 
   async componentDidMount() {
-    const { trackId } = this.props;
-    const { favorites } = this.state;
     this.setState({ loading: true });
-    const favorite = await getFavoriteSongs();
-    console.log(favorite);
-    favorite.find((element) => element.trackId === (trackId))
-      ? this.setState({ check: true })
-      : this.setState({ check: false });
+    await this.checkFavorite();
     this.setState({ loading: false });
   }
 
+  checkFavorite = async () => {
+    const { trackId } = this.props;
+    this.setState({ loading: true });
+    const favorite = await getFavoriteSongs();
+    return favorite.find((element) => element.trackId === (trackId))
+      ? this.setState({ check: true })
+      : this.setState({ check: false });
+  };
+
+  addFavorite = async (target) => (await target.checked
+    ? addSong(JSON.parse(target.value))
+    : removeSong(JSON.parse(target.value)));
+
   favorite = async (event) => {
-    const { loading, check } = this.state;
+    const { check } = this.state;
     const { target } = event;
     this.setState({ check: !check });
     this.setState({ loading: true });
-    target.checked
-      ? await addSong(JSON.parse(target.value))
-      : await removeSong(JSON.parse(target.value));
+    await this.addFavorite(target);
     this.setState({ loading: false });
   };
 
@@ -66,4 +71,10 @@ class MusicCard extends React.Component {
   }
 }
 
+MusicCard.propTypes = ({
+  previewUrl: PropTypes.string,
+  songName: PropTypes.string,
+  trackId: PropTypes.number,
+  element: PropTypes.object,
+}).isRequired;
 export default MusicCard;
