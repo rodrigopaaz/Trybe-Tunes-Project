@@ -14,16 +14,16 @@ class Favorites extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.fetchSongs();
   }
 
-  /*   async componentDidUpdate() {
-    await this.fetchSongs();
-  } */
-
   fetchSongs = async () => {
+    const { song } = this.state;
+    this.setState({ loading: true });
+    console.log(`primeiro ${song}`);
     const songs = await getFavoriteSongs();
+    console.log(`segundo ${songs}`);
     this.setState({ song: songs });
     this.setState({ loading: false });
   };
@@ -31,22 +31,22 @@ class Favorites extends React.Component {
   render() {
     const { loading, song, isFavorite } = this.state;
     if (loading) { return <Carregando />; }
-    const music = (<div>
-      {
-        song.map((element, key) => (
-          key >= 0 ? <MusicCard
-            key={ key }
-            previewUrl={ element.previewUrl }
-            songName={ element.trackName }
-            trackId={ element.trackId }
-            element={ element }
-            isFavorite={ isFavorite }
-            fetchSongs={ this.fetchSongs }
-          />
-            : null
-        ))
-      }
-    </div>);
+    const music = (
+      <div>
+        {
+          song.map((element, key) => (
+            <MusicCard
+              key={ key }
+              previewUrl={ element.previewUrl }
+              songName={ element.trackName }
+              trackId={ element.trackId }
+              element={ element }
+              isFavorite={ isFavorite }
+              fetchSongs={ this.fetchSongs }
+            />
+          ))
+        }
+      </div>);
     return (
       <div className="main" data-testid="page-favorites">
         <Header />

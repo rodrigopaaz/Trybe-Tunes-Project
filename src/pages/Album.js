@@ -27,6 +27,8 @@ class Album extends React.Component {
     this.setState({ songs: musics });
   };
 
+  fetchSongs = () => console.log('fetch');
+
   render() {
     const { artist, loading, songs } = this.state;
     console.log(songs);
@@ -43,6 +45,7 @@ class Album extends React.Component {
             songName={ element.trackName }
             trackId={ element.trackId }
             element={ element }
+            fetchSongs={ this.fetchSongs }
           />
             : null
         ))}

@@ -13,14 +13,9 @@ class MusicCard extends React.Component {
   }
 
   async componentDidMount() {
-    this.setState({ loading: true });
     await this.checkFavorite();
     this.setState({ loading: false });
   }
-
-  /*   async componentDidUpdate() {
-    await this.checkFavorite();
-  } */
 
   checkFavorite = async () => {
     const { trackId } = this.props;
@@ -31,21 +26,34 @@ class MusicCard extends React.Component {
       : this.setState({ check: false });
   };
 
-  addFavorite = async (target) => (await target.checked
-    ? addSong(JSON.parse(target.value))
-    : removeSong(JSON.parse(target.value)));
+  addFavorite = async (target) => {
+    await
+    addSong(JSON.parse(target.value));
+  };
+
+  removeFavorite = async (target) => {
+    await
+    removeSong(JSON.parse(target.value));
+  };
+
+  favoriteUpdate = () => {
+    const { fetchSongs } = this.props;
+    this.setState({ loading: true });
+    fetchSongs();
+    this.setState({ loading: false });
+  };
 
   favorite = async (event) => {
-    const { isFavorite, fetchSongs } = this.props;
+    const { isFavorite } = this.props;
     const { check } = this.state;
     const { target } = event;
-    !isFavorite
-      ? this.setState({ check: !check })
-      : null;
+    if (!isFavorite) { this.setState({ check: !check }); }
     this.setState({ loading: true });
-    await this.addFavorite(target);
-    await fetchSongs();
+    if (await target.checked) {
+      this.addFavorite(target);
+    } else { this.removeFavorite(target); }
     this.setState({ loading: false });
+    this.favoriteUpdate();
   };
 
   render() {
@@ -80,6 +88,11 @@ class MusicCard extends React.Component {
     );
   }
 }
+MusicCard.defaultProps = {
+  name: 'Rahul',
+  eyeColor: 'deepblue',
+  age: '45',
+};
 
 MusicCard.propTypes = ({
   previewUrl: PropTypes.string,
