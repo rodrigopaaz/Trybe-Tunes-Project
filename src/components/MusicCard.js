@@ -99,5 +99,7 @@ MusicCard.propTypes = ({
   songName: PropTypes.string,
   trackId: PropTypes.number,
   element: PropTypes.object,
+  isFavorite: PropTypes.bool,
+  fetchSongs: PropTypes.func,
 }).isRequired;
 export default MusicCard;
