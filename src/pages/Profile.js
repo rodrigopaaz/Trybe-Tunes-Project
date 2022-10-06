@@ -25,7 +25,6 @@ class Profile extends React.Component {
 
   render() {
     const { usuario, loading } = this.state;
-    const { history } = this.props;
     if (loading) { return (<Carregando />); }
     return (
       <div className="main" data-testid="page-profile">
@@ -46,15 +45,15 @@ class Profile extends React.Component {
             <p>{usuario.name}</p>
           </span>
           <span>
-            <h3>Name</h3>
+            <h4>Name</h4>
             <p>{usuario.name}</p>
           </span>
           <span>
-            <h3>E-mail</h3>
+            <h4>E-mail</h4>
             <p>{usuario.email}</p>
           </span>
           <span>
-            <h3>Description</h3>
+            <h4>Description</h4>
             <p>{usuario.description}</p>
           </span>
         </div>
