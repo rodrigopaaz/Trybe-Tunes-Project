@@ -59,9 +59,11 @@ class Login extends React.Component {
     );
   }
 }
-
 Login.propTypes = ({
   login: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 }).isRequired;
 
 export default Login;
