@@ -53,7 +53,9 @@ class Login extends React.Component {
           >
             Entrar
           </button>
-          {loading && <p>Carregando...</p>}
+          <div>
+            {loading && <p>Carregando...</p>}
+          </div>
         </div>
       </div>
     );
