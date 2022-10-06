@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import Carregando from '../pages/Carregando';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -17,6 +18,10 @@ class MusicCard extends React.Component {
     this.setState({ loading: false });
   }
 
+  /*   async componentDidUpdate() {
+    await this.checkFavorite();
+  } */
+
   checkFavorite = async () => {
     const { trackId } = this.props;
     this.setState({ loading: true });
@@ -31,17 +36,22 @@ class MusicCard extends React.Component {
     : removeSong(JSON.parse(target.value)));
 
   favorite = async (event) => {
+    const { isFavorite, fetchSongs } = this.props;
     const { check } = this.state;
     const { target } = event;
-    this.setState({ check: !check });
+    !isFavorite
+      ? this.setState({ check: !check })
+      : null;
     this.setState({ loading: true });
     await this.addFavorite(target);
+    await fetchSongs();
     this.setState({ loading: false });
   };
 
   render() {
     const { previewUrl, songName, trackId, element } = this.props;
     const { loading, check } = this.state;
+    if (loading) { return <Carregando />; }
     return (
       <div className="main">
         <p>{ songName }</p>
@@ -53,11 +63,11 @@ class MusicCard extends React.Component {
           <code>audio</code>
           .
         </audio>
-        <label htmlFor="favorite">
+        <label htmlFor={ `fav-${trackId}` }>
           Favorita
           <input
             type="checkBox"
-            id={ trackId }
+            id={ `fav-${trackId}` }
             data-testid={ `checkbox-music-${trackId}` }
             onChange={ this.favorite }
             checked={ check }
