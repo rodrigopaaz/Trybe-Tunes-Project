@@ -32,20 +32,24 @@ class Favorites extends React.Component {
     const { loading, song, isFavorite } = this.state;
     if (loading) { return <Carregando />; }
     const music = (
-      <div>
-        {
-          song.map((element, key) => (
-            <MusicCard
-              key={ key }
-              previewUrl={ element.previewUrl }
-              songName={ element.trackName }
-              trackId={ element.trackId }
-              element={ element }
-              isFavorite={ isFavorite }
-              fetchSongs={ this.fetchSongs }
-            />
-          ))
-        }
+      <div className="search__content">
+        <div className="search"><h1>Favoritas</h1></div>
+        <div className="favorites__result">
+          {
+            song.map((element, key) => (
+              <div className="song__name" key={ key }>
+                <MusicCard
+                  previewUrl={ element.previewUrl }
+                  songName={ element.trackName }
+                  trackId={ element.trackId }
+                  element={ element }
+                  isFavorite={ isFavorite }
+                  fetchSongs={ this.fetchSongs }
+                />
+              </div>
+            ))
+          }
+        </div>
       </div>);
     return (
       <div className="main" data-testid="page-favorites">

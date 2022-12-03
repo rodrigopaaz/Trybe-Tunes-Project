@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
 import Carregando from './Carregando';
+import emptyUser from '../music.png';
 
 class Profile extends React.Component {
   constructor() {
@@ -29,33 +30,47 @@ class Profile extends React.Component {
     return (
       <div className="main" data-testid="page-profile">
         <Header />
-        <div>
-          <Link
-            to="../profile/edit"
-          >
-            Editar perfil
-          </Link>
-        </div>
-        <div>
-          <span>
-            <img data-testid="profile-image" src={ usuario.image } alt="user" />
-          </span>
-          <span>
-            <h3>Name</h3>
-            <p>{usuario.name}</p>
-          </span>
-          <span>
-            <h4>Name</h4>
-            <p>{usuario.name}</p>
-          </span>
-          <span>
-            <h4>E-mail</h4>
-            <p>{usuario.email}</p>
-          </span>
-          <span>
-            <h4>Description</h4>
-            <p>{usuario.description}</p>
-          </span>
+        <div className="album_list">
+          <div className="main__album_header">
+            <div className="search">
+              {!usuario.image
+                ? (
+                  <img
+                    data-testid="profile-image"
+                    src={ emptyUser }
+                    alt="userVazio"
+                    className="perfil"
+                  />)
+                : (
+                  <img
+                    data-testid="profile-image"
+                    src={ usuario.image }
+                    alt="user"
+                    className="perfil"
+                  />)}
+            </div>
+          </div>
+          <div className="favorites__result_profile">
+            <div className="profile__description">
+              <p>
+                <p>Name</p>
+                <p>{usuario.name}</p>
+              </p>
+              <p>
+                <p>E-mail</p>
+                <p>{usuario.email}</p>
+              </p>
+              <p>
+                <p>Description</p>
+                <p>{usuario.description}</p>
+              </p>
+              <Link
+                to="../profile/edit"
+              >
+                Editar perfil
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     );

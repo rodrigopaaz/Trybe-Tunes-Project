@@ -11,7 +11,7 @@ import Search from './pages/Search';
 class App extends React.Component {
   render() {
     return (
-      <div className="main">
+      <div className="main__app">
         <Switch>
           <Route
             exact

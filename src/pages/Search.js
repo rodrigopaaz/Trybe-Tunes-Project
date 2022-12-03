@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Carregando from './Carregando';
 
 class Search extends React.Component {
   constructor() {
@@ -57,57 +58,58 @@ class Search extends React.Component {
 
   render() {
     const { loading, user, checkLength, showAlbum, albumName, album } = this.state;
+    if (loading) { return (<Carregando />); }
     return (
       <div className="main" data-testid="page-search">
         <Header />
-        {loading && <h4>Carregando...</h4>}
-        <div>
-          <input
-            type="text"
-            data-testid="search-artist-input"
-            value={ albumName }
-            onChange={ this.checkLogin }
-          />
-          <button
-            type="button"
-            data-testid="search-artist-button"
-            disabled={ checkLength }
-            onClick={ this.fetchAlbum }
-          >
-            Pesquisar
-          </button>
-          <p data-testid="header-user-name">
-            { user.name }
-          </p>
-          {showAlbum
-          && <p>{`Resultado de álbuns de: ${user}`}</p>}
-        </div>
-        <div>
-          { album.length >= 1
-            ? album.map((element, key) => (
-              <div key={ key }>
-                <p>
-                  Álbum
-                  {' '}
-                  {element.collectionName}
-                </p>
-                <p>
-                  Artista
-                  {' '}
-                  {element.artistName}
-                </p>
-                <Link
-                  data-testid={ `link-to-album-${element.collectionId}` }
-                  to={ `./album/${element.collectionId}` }
-                >
-                  Link
+        <div className="search__content">
+          <div className="search">
+            <ion-icon name="logo-facebook" />
+            <input
+              type="text"
+              data-testid="search-artist-input"
+              value={ albumName }
+              onChange={ this.checkLogin }
+              placeholder="DIGITE SUA PESQUISA"
+            />
+            <button
+              type="button"
+              data-testid="search-artist-button"
+              disabled={ checkLength }
+              onClick={ this.fetchAlbum }
+            >
+              Pesquisar
+            </button>
+          </div>
+          <div className="search__result">
+            {showAlbum
+          && <p className="result">{`Resultado de álbuns de: ${user}`}</p>}
+            { album.length >= 1
+              ? album.map((element, key) => (
+                <div key={ key }>
+                  <Link to={ `./album/${element.collectionId}` }>
+                    <img
+                      src={ element.artworkUrl100 }
+                      alt="imagem"
+                      srcSet=""
+                      className="artist_image"
+                    />
+                    <p>
+                      Álbum
+                      {' '}
+                      {element.collectionName}
+                    </p>
+                    <p>
+                      Artista
+                      {' '}
+                      {element.artistName}
+                    </p>
+                  </Link>
+                </div>
+              ))
+              : <p />}
 
-                </Link>
-
-              </div>
-            ))
-            : <p>Nenhum álbum foi encontrado</p>}
-
+          </div>
         </div>
 
       </div>

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { IconName } from 'react-icons/bs';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import Carregando from './Carregando';
 
 class Album extends React.Component {
   constructor() {
@@ -31,27 +33,40 @@ class Album extends React.Component {
 
   render() {
     const { artist, loading, songs } = this.state;
-    console.log(songs);
+    if (loading) { return (<Carregando />); }
     return (
       <div className="main" data-testid="page-album">
         <Header />
-        {loading && <p>Carregando...</p>}
-        {!loading
-          && <p data-testid="artist-name">{artist.artistName }</p>}
-        { songs.map((element, key) => (
-          key >= 1 ? <MusicCard
-            key={ key }
-            previewUrl={ element.previewUrl }
-            songName={ element.trackName }
-            trackId={ element.trackId }
-            element={ element }
-            fetchSongs={ this.fetchSongs }
-          />
-            : null
-        ))}
-        {!loading
-          && <p data-testid="album-name">{artist.collectionName }</p>}
-
+        <div className="album_list">
+          <div className="main__album_header">
+            <div className="search">
+              <img
+                src={ artist.artworkUrl100 }
+                alt="imagem"
+                srcSet=""
+                className="artist_image"
+              />
+              <div className="ambum__description">
+                <p data-testid="artist-name">{artist.artistName }</p>
+                <p data-testid="album-name">{artist.collectionName }</p>
+              </div>
+            </div>
+          </div>
+          <div className="favorites__result">
+            { songs.map((element, key) => (
+              key >= 1 ? <MusicCard
+                key={ key }
+                previewUrl={ element.previewUrl }
+                img={ element.artworkUrl100 }
+                songName={ element.trackName }
+                trackId={ element.trackId }
+                element={ element }
+                fetchSongs={ this.fetchSongs }
+              />
+                : null
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

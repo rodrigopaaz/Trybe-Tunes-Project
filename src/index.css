@@ -5,6 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-image: url(/src/BG\ AZUL.png);
+  background-color: rgb(3, 14, 0);
+  background-size: cover;
+  font-family: 'Epilogue', sans-serif;
+
+
 }
 
 code {
@@ -12,8 +23,491 @@ code {
     monospace;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .loading {
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.mainLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.form__login {
+  display: flex;
+  flex-direction: column;
+  width: 750px;
+  height: 450px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 26px rgba(68, 73, 85, 0.2);
+  border-radius: 20px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form__login input {
+  text-align: center;
+  width: 400px;
+  height: 40px;
+  border: 1px solid #e22200;
+  border-radius: 100px;
+  margin-bottom: 8px;
+}
+
+.form__login button {
+  width: 400px;
+  height: 40px;
+  background: #e22200;
+  ;
+  border-radius: 100px;
+  color: #FFFFFF;
+}
+
+.name__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__header {
+  display: flex;
+  width: 250px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 2px 2px 2px black;
+  width: 30%;
+  color: white;
+  background-color: rgba(5, 4, 7, 0.9);
+  text-decoration: none;
+}
+
+.main__app {
+  display: flex;
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.main .carregando {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.main__header nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__header .logo {
+  margin-top: 80px;
+  width: 150px;
+  height: 100px;
+}
+
+.nav__search {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 40px;
+}
+
+.main__header nav a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: aliceblue;
+  margin-left: 15px;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.main__header nav {
+  display: flex;
+  height: 50%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  height: 320px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search input {
+  width: 400px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 23px;
+  margin-right: 6px;
+  color: #0b0c0c;
+  text-align: center;
+}
+
+.search input::placeholder {
+  display: flex;
+  color: #191a1b;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.result {
+  text-align: center;
+  margin: 20px;
+  width: 100%;
+}
+
+.search button {
+  width: 114px;
+  height: 40px;
+  background: #e22200;
+  border-radius: 23px;
+  color: #EFF3F9;
+}
+
+.search__result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70%;
+  background: #EFF3F9;
+  width: 100%;
+  overflow: scroll;
+  height: 905px;
+}
+
+.search__result div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 400px;
+  height: 370px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.search__result div a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.search__result div img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.search__result img {
+  width: 100%;
+  height: 200px;
+  left: calc(50% - 200px/2 - 213px);
+  top: calc(50% - 200px/2 + 114px);
+  mix-blend-mode: normal;
+}
+
+.album_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.search__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.search h1 {
+  color: aliceblue
+}
+
+.carregando {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  color: black;
+}
+
+.carregando .loading {
+  text-shadow: 2px white;
+}
+
+.carregando h5,
+.loading {
+  margin-top: 5px;
+  font-weight: 400;
+  font-size: 48.9205px;
+  color: rgb(255, 255, 255);
+  border-color: #FFFFFF;
+  font-weight: bold;
+}
+
+.main__songs {
+  display: flex;
+  flex-direction: column;
+}
+
+.song {
+  display: flex;
+  justify-content: space-evenly;
+  width: 800px;
+  margin-bottom: 5px;
+  color: aliceblue;
+}
+
+.song audio {
+  display: flex;
+  flex-basis: 50%;
+}
+
+.song p {
+  display: flex;
+  flex-basis: 25%;
+  color: black;
+}
+
+.song label {
+  display: flex;
+  flex-basis: 15%;
+  color: black;
+}
+
+.favorites__result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #EFF3F9;
+  width: 100%;
+  height: 905px;
+  padding-top: 30px;
+  overflow: scroll;
+}
+
+.main__album_header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.main__album_header .search {
+  display: flex;
+  width: 75%;
+  justify-content: flex-start;
+  color: aliceblue;
+}
+
+.main__album_header .search img {
+  width: 240px;
+  height: 240px;
+  margin-bottom: -320px;
+  mix-blend-mode: normal;
+  filter: drop-shadow(-9px 8px 8px rgba(68, 73, 85, 0.2));
+  border-radius: 12px;
+  margin-right: 72px;
+}
+
+.main__album_header .ambum__description {
+  margin-top: 170px;
+  font-weight: bold;
+}
+
+.HeaderProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.HeaderProfile img {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  height: 100px;
+  border-radius: 300px;
+}
+
+
+.favorites__result_profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background-color: #EFF3F9;
+  height: 905px;
+  padding-top: 30px;
+}
+
+.main__album_header .search .perfil {
+  width: 340px;
+  height: 340px;
+  margin-bottom: -320px;
+  mix-blend-mode: normal;
+  filter: drop-shadow(-9px 8px 8px rgba(68, 73, 85, 0.2));
+  border-radius: 340px;
+  margin-right: 72px;
+}
+
+.profile__description {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  margin-left: 650px;
+  margin-top: -500px;
+  overflow-wrap: break-word;
+}
+
+.profile__description a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  font-weight: bold;
+  text-decoration: none;
+  width: 152px;
+  height: 40px;
+  left: 602px;
+  top: 564px;
+  background: #e22200;
+  border-radius: 100px;
+}
+
+.profile__description_edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  height: 100%;
+  width: 450px;
+  margin-left: 650px;
+  overflow-wrap: break-word;
+}
+
+.profile__description_edit label {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.profile__description_edit input,
+.profile__description_edit textarea {
+  display: flex;
+  flex-direction: column;
+  width: 288px;
+  height: 37px;
+  left: 0px;
+  top: 0px;
+
+  /* gray 100 */
+
+  background: #d3d6db;
+
+}
+
+.check {
+  display: flex;
+  margin-right: 140px;
+  background: green;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+}
+
+.error {
+  display: flex;
+  margin-right: 140px;
+  width: 15px;
+  height: 15px;
+}
+
+.checkEmail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.checkName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.checkDescription {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.checkEmail img,
+.checkName img,
+.checkDescription img {
+  margin-left: 5px;
+}
+
+.profile__description_edit button {
+  display: flex;
+  flex-direction: column;
+  width: 295px;
+  height: 37px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  margin-top: 40px;
+  background: #e22200;
+
+}
+
+.checkDescription {
+  display: flex;
+  margin-left: 322px;
+}
+
+.checkDescription textarea {
+  display: flex;
+  height: 100px;
+  width: 600px;
+  overflow-wrap: break-word;
+  vertical-align: text-top;
+
+}
+
+.checkDescription textarea::placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

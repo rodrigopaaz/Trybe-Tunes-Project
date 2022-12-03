@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Carregando from '../pages/Carregando';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 class MusicCard extends React.Component {
   constructor() {
@@ -59,31 +64,39 @@ class MusicCard extends React.Component {
   render() {
     const { previewUrl, songName, trackId, element } = this.props;
     const { loading, check } = this.state;
-    if (loading) { return <Carregando />; }
     return (
-      <div className="main">
-        <p>{ songName }</p>
-        <audio data-testid="audio-component" src={ previewUrl } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          {' '}
-          {' '}
-          <code>audio</code>
-          .
-        </audio>
-        <label htmlFor={ `fav-${trackId}` }>
-          Favorita
-          <input
-            type="checkBox"
-            id={ `fav-${trackId}` }
-            data-testid={ `checkbox-music-${trackId}` }
-            onChange={ this.favorite }
-            checked={ check }
-            value={ JSON.stringify(element) }
-
-          />
-        </label>
-        {loading && <p>Carregando...</p>}
+      <div className="main__songs">
+        {loading && <Carregando />}
+        <div className="song">
+          <p>{ songName }</p>
+          <audio data-testid="audio-component" src={ previewUrl } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            {' '}
+            {' '}
+            <code>audio</code>
+            .
+          </audio>
+          <label htmlFor={ `fav-${trackId}` }>
+            { `fav-${trackId}` }
+            <Checkbox
+              sx={ {
+                color: 'red',
+                '&.Mui-checked': {
+                  color: 'red',
+                },
+              } }
+              onChange={ this.favorite }
+              id={ `fav-${trackId}` }
+              checked={ check }
+              value={ JSON.stringify(element) }
+              { ...label }
+              icon={ <FavoriteBorder /> }
+              checkedIcon={ <Favorite /> }
+              name={ `fav-${trackId}` }
+            />
+          </label>
+        </div>
       </div>
     );
   }
